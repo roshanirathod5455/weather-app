@@ -1,42 +1,20 @@
-// Replace with your own OpenWeatherMap API key
-const apiKey = "b29990ae88ff64f70b68be6c88ed2f06";
+function getWeather(){
 
-const cityInput = document.getElementById("city");
-const getWeatherBtn = document.getElementById("getWeather");
-const weatherResult = document.getElementById("weatherResult");
+let city = document.getElementById("city").value
 
-// Arrow function + async/await + template literals
-const getWeather = async (city) => {
-  weatherResult.textContent = "Loading...";
-  try {
-    const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-    );
-    const data = await res.json();
+document.getElementById("result").innerHTML =
+"Weather for " + city
 
-    if (data.cod === "404") {
-      weatherResult.textContent = "City not found";
-      return;
-    }
+if(city=="manali"){
+document.body.className="snow"
+}
 
-    weatherResult.innerHTML = `
-      <h2>${data.name}, ${data.sys.country}</h2>
-      <p>Temperature: ${data.main.temp}°C</p>
-      <p>Weather: ${data.weather[0].main}</p>
-      <p>Humidity: ${data.main.humidity}%</p>
-    `;
-  } catch (err) {
-    weatherResult.textContent = "Error fetching weather";
-    console.error(err);
-  }
-};
+if(city=="mumbai"){
+document.body.className="rain"
+}
 
-// Event listener using modern syntax
-getWeatherBtn.addEventListener("click", () => {
-  const city = cityInput.value.trim();
-  if (!city) {
-    alert("Please enter a city name");
-    return;
-  }
-  getWeather(city);
-});
+if(city=="nagpur"){
+document.body.className="sun"
+}
+
+}
